@@ -231,7 +231,7 @@ main :: IO ()
 main = defaultMain [ bgroup "clique/2000"         $ benchmarks $ AM.clique $ shuffle 179 [1..2000]
                    , bgroup "path/1000000"        $ benchmarks $ AM.path [1..1000000]
                    , bgroup "btree/20"            $ benchmarks $ btree 20
-                   , bgroup "ttree/13"            $ benchmarks $ ttree 13
+                   , bgroup "ttree/12"            $ benchmarks $ ttree 12
                    , bgroup "caterpillar/1000000" $ benchmarks $ caterpillar 500000
                    , bgroup "grid/750"            $ benchmarks $ grid 750
                    , bgroup "biclique/1500"       $ benchmarks $ AM.biclique (shuffle 179 [1..1500]) (shuffle 239 [1..1500])
