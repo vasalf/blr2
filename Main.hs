@@ -220,7 +220,7 @@ shuffle seed xs = evalRand (run xs) (mkStdGen seed)
                          return $ y:(change i x xs)
 
 
-benchmarks :: AM.AdjacencyMap Int -> [Benchmark]
+benchmarks :: Ord a => AM.AdjacencyMap a -> [Benchmark]
 benchmarks g = [ bench "Maybe"     $ nf detectParts   g
                , bench "PartMonad" $ nf detectParts'  g
                , bench "Either"    $ nf detectParts'' g
@@ -234,5 +234,5 @@ main = defaultMain [ bgroup "clique/2000"         $ benchmarks $ AM.clique $ shu
                    , bgroup "ttree/12"            $ benchmarks $ ttree 12
                    , bgroup "caterpillar/1000000" $ benchmarks $ caterpillar 500000
                    , bgroup "grid/750"            $ benchmarks $ grid 750
-                   , bgroup "biclique/1500"       $ benchmarks $ AM.biclique (shuffle 179 [1..1500]) (shuffle 239 [1..1500])
+                   , bgroup "biclique/1500"       $ benchmarks $ AM.biclique (Left <$> shuffle 179 [1..1500]) (Right <$> shuffle 239 [1..1500])
                    ]
