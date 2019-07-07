@@ -20,6 +20,8 @@ executable blr2
   main-is:             Main.hs
   other-modules:       Algebra.Graph.Bipartite.AdjacencyMap
                        Data.MyMap
+  ghc-options:         -Wall
+  -- ghc-options:         -ddump-simpl -dsuppress-idinfo -dsuppress-coercions -dsuppress-type-applications -dsuppress-uniques -dsuppress-module-prefixes
   -- other-extensions:
   build-depends:       base >=4.10.0.0,
                        containers >= 0.5.5.1 && < 0.8,

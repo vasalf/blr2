@@ -16,6 +16,7 @@ import Control.Monad.State.Lazy
 import Control.Monad.Trans.Maybe
 import Data.Bits
 import Data.Either        (isRight)
+import Data.Foldable
 import Data.List          (splitAt)
 import Data.List.NonEmpty (NonEmpty(..), (<|))
 import Data.Maybe         (isJust, fromJust)
@@ -75,8 +76,8 @@ partMonad g = let s = AM.symmetricClosure g
                                    Nothing -> dfs g p (v <| l) v
 
         dfs :: Ord a => AM.AdjacencyMap a -> Part -> NE.NonEmpty a -> a -> PartMonad a
-        dfs g p l v = do modify $ Map.insert v (p, l)
-                         msum $ map (action g (otherPart p) l v) $ neighbours v g
+        dfs g p l v = do modify' $ Map.insert v (p, l)
+                         asum $ map (action g (otherPart p) l v) $ neighbours v g
 
         runDfs :: Ord a => AM.AdjacencyMap a -> a -> PartMonad a
         runDfs g v = do m <- get
