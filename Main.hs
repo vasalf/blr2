@@ -69,6 +69,7 @@ partMonad :: Ord a => AM.AdjacencyMap a -> PartMonad a
 partMonad g = let s = AM.symmetricClosure g
                in msum $ map (runDfs s) $ AM.vertexList s
     where
+        {-# INLINE action #-}
         action :: Ord a => AM.AdjacencyMap a -> Part -> NE.NonEmpty a -> a -> a -> PartMonad a
         action g p l u v = do m <- get
                               case v `Map.lookup` m of
